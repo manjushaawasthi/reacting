@@ -1,0 +1,47 @@
+Tools used:
+
+1. NPM - Package manager
+npm init -y -> creates default package.json under root folder
+(package-lock.json -> Used to lock dependencies, so prod build(uses package-lock.json) to download exactly the same version that are in local env)
+
+2. Prettier - validates and fixes code format
+npm install -D prettier / npm i -D prettier
+-D specifies developer dependency (dependencies needed just for development purpose on local env, not to be included in prod build)
+package.json ->
+ "scripts": {
+    "format": "prettier \"src/**/*.{js, html}\" --write" // Run prettier on any directory within src that has js or html extension
+  },
+npm run format
+
+To run prettier automatically while saving a file, 
+VS Code -> Install extension for prettier -> VS code settings -> 
+Enable -> 
+1. Editor: Format On Save, and 
+2. Prettier: Require Config (Turn on prettier only on projects that have .prettierrc config file defined)
+Add .prettierrc file to root folder. If we just have {} defined in the .prettierrc file, it means use the default config
+
+3. Eslint -> validates code syntax
+npm i -D eslint eslint-config-prettier
+(* we need to install eslint-config-prettier to ensure that eslint doesn't overlap with the tasks that prettier is performing)
+Now add .eslintrc.json file to root folder.
+package.json ->
+ "scripts": {
+    "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
+  },
+
+To run eslint automatically, 
+VS Code -> Install the extension for Eslint -> 
+Enable -> 
+1. Eslint: Enable, and 
+1. Eslint: Auto Fix On Save, and 
+
+4. Parcel - Code bundler similar to Webpack, but much simpler(parcel has no config, so less complicated and less capable than webpack. Use webpack for complex requirements)
+Parcel also does the hot module replacement for free, no additional config needed to support this feature
+npm i -D parcel-bundler
+package.json ->
+ "scripts": {
+     "dev": "parcel src/index.html -p 3000" (With parcel, we just need to point it to index.html in the project, also -p option is used here to override the port for the react app)
+  },
+npm run format
+
+Reference: https://btholt.github.io/complete-intro-to-react-v5/
