@@ -6,6 +6,8 @@ const SearchParams = () => {
   // Best practice when using hooks -> Never define hooks under conditional(if, for) statements
   const [location, setLocation] = useState("Seattle, WA");
   const [animal, setAnimal] = useState("dog");
+  const [breed, setBreed] = useState("");
+  const [breeds, setBreeds] = useState([]);
 
   return (
     <div className="search-params">
@@ -37,6 +39,23 @@ const SearchParams = () => {
           </select>
         </label>
 
+        <label htmlFor="breed">
+          Breed
+          <select
+            id="breed"
+            value={breed}
+            onChange={(e) => setBreed(e.target.value)}
+            onBlur={(e) => setBreed(e.target.value)}
+            disabled={!breeds.length}
+          >
+            <option>All</option>
+            {breeds.map((breedStr) => (
+              <option key={breedStr} value={breedStr}>
+                {breedStr}
+              </option>
+            ))}
+          </select>
+        </label>
         <button>Submit</button>
       </form>
     </div>
