@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { ANIMALS } from "@frontendmasters/pet";
+import useDropdown from "./useDropdown.js";
 
 const SearchParams = () => {
   // Prop destructuring -> useState returns 2 items - first, current state and second, the function for updating this state
   // Best practice when using hooks -> Never define hooks under conditional(if, for) statements
   const [location, setLocation] = useState("Seattle, WA");
-  const [animal, setAnimal] = useState("dog");
-  const [breed, setBreed] = useState("");
   const [breeds, setBreeds] = useState([]);
+  const [animal, AnimalDropdown] = useDropdown("Animal", "dog", ANIMALS);
+  const [breed, BreedDropdown] = useDropdown("Breed", "", breeds);
 
   return (
     <div className="search-params">
@@ -22,40 +23,9 @@ const SearchParams = () => {
           />
         </label>
 
-        <label htmlFor="animal">
-          Animal
-          <select
-            id="animal"
-            value={animal}
-            onChange={(e) => setAnimal(e.target.value)}
-            onBlur={(e) => setAnimal(e.target.value)}
-          >
-            <option>All</option>
-            {ANIMALS.map((animal) => (
-              <option key={animal} value={animal}>
-                {animal}
-              </option>
-            ))}
-          </select>
-        </label>
+        <AnimalDropdown />
+        <BreedDropdown />
 
-        <label htmlFor="breed">
-          Breed
-          <select
-            id="breed"
-            value={breed}
-            onChange={(e) => setBreed(e.target.value)}
-            onBlur={(e) => setBreed(e.target.value)}
-            disabled={!breeds.length}
-          >
-            <option>All</option>
-            {breeds.map((breedStr) => (
-              <option key={breedStr} value={breedStr}>
-                {breedStr}
-              </option>
-            ))}
-          </select>
-        </label>
         <button>Submit</button>
       </form>
     </div>
