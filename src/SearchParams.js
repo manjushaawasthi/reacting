@@ -18,10 +18,19 @@ const SearchParams = () => {
     setBreed("");
     pet.breeds(animal).then(({ breeds }) => {
       const breedNames = breeds.map(({ name }) => name);
-      console.log(breedNames);
       setBreeds(breedNames);
     }, console.error);
   }, [animal, setBreed, setBreeds]); // Define dependencies, run this effect only if one of these dependencies changes.
+
+  // Run effect only once (like componentDidMount)
+  useEffect(() => {
+    console.log("SearchParam component has mounted");
+  }, []); // Empty set of dependencies
+
+  // Run effect every time state changes
+  useEffect(() => {
+    console.log("Something changed");
+  }); // No dependencies
 
   return (
     <div className="search-params">
