@@ -11,9 +11,9 @@
     "react/prop-types": 0,
     "no-console": "warn",
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-depths": "warn"
+    "react-hooks/exhaustive-deps": "warn"
   },
-  "plugins": ["react", "import", "jsx-a11y", "react-hooks"],
+  "plugins": ["react", "react-hooks", "import", "jsx-a11y"],
   "parserOptions": {
     "ecmaVersion": 2018,
     "sourceType": "module",
